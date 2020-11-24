@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const cors = require("cors");
+const db = require('./../config/database')
 
 // const server_port = 3000;
 const server_port = process.env.PORT || 3000;
@@ -51,6 +52,9 @@ class Server {
       })
     );
     app.use(cors());
+    db.sequelize.sync().then(function() {
+      console.log("synced")
+    })
     app.listen(server_port, () => {
       console.log("http://localhost:3000/   Server running on port " + server_port);
     });
