@@ -5,7 +5,7 @@ const cors = require("cors");
 const db = require('./config/database')
 
 // const server_port = 3000;
-const server_port = process.env.PORT || 3000;
+const server_port = process.env.PORT;
 
 console.log("Environment State : ", process.env.NODE_ENV);
 
