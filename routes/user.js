@@ -75,6 +75,16 @@ class sampleRoute {
         res.json({ code: 500, msg: 'getting Accesses Failed' })
       }
     })
+    router.post('/changefav/:email',async(req,res)=>{
+      try {
+        var p=JSON.stringify(req.body);
+        var ma=req.params.email
+        const response = await this.controller.changefav(p,ma)
+        res.json(response)
+      } catch (err) {
+        res.json({ code: 500, msg: 'getting Accesses Failed' })
+      }
+    })
     router.post('/changepass/:email',async(req,res)=>{
       try {
         let npass;

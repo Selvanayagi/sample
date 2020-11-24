@@ -75,11 +75,28 @@ class SampleController {
         })
     }
 
+    //change fav
+    changefav(data,email){
+        return new Promise((resolve, reject) => {
+            try {
+                User.update({ fav: data}, {
+                    where: {
+                        moboremail:email
+                    }
+                    }).then(function(){
+                        resolve('success');
+                })
+
+            } catch (err) {
+                reject(err)
+            }
+        })
+    }
+
     //change password
     changepass(data,email){
         return new Promise((resolve, reject) => {
             try {
-
                 User.update({ pass: data}, {
                     where: {
                         moboremail:email
