@@ -33,7 +33,7 @@ class sampleRoute  extends sample{
       console.log("user")
       next()
     })
-    router.get('/login/:moboremail/:password',(req,res)=>{
+    router.get('/login/:moboremail/:password',async(req,res)=>{
       try {
         const response = await this.controller.login(req.params.moboremail,req.params.password);
         if(response=="success"){
