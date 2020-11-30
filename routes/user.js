@@ -149,9 +149,6 @@ class sampleRoute  extends sample{
     })
     router.post('/saveuser',async(req,res)=>{
       try {
-        const token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];    
-        const tokenres=this.jwt.verify(token);
-        console.log(tokenres) 
         const response = await this.controller.saveuser(req.body)
         res.json(response)
       } catch (err) {
