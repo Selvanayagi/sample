@@ -22,7 +22,7 @@ class sample{
   }
 }
 class sampleRoute  extends sample{
-  constructor(sampleContoller) {
+  constructor(JWT,sampleContoller) {
     super(JWT);
     this.controller = sampleContoller
     this.init()
