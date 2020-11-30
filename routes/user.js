@@ -15,14 +15,15 @@ var storage = multer.diskStorage({
   }
 })
 var upload = multer({ storage: storage });
-// class sample{
+class sample{
   constructor(JWT) {
     this.jwt= JWT
     // this.init()
   }
-// }
-class sampleRoute{
+}
+class sampleRoute  extends sample{
   constructor(sampleContoller) {
+    super(JWT);
     this.controller = sampleContoller
     this.init()
   }
