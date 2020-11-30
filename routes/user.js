@@ -155,6 +155,14 @@ class sampleRoute  extends sample{
         res.json({ code: 500, msg: 'getting Accesses Failed' })
       }
     })
+    router.post('/ct',async(req,res)=>{
+      try {
+        const response = await this.controller.saveuser(req.body)
+        res.json(response)
+      } catch (err) {
+        res.json({ code: 500, msg: 'getting Accesses Failed' })
+      }
+    })
   }
 
   // Get Router
