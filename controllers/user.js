@@ -3,6 +3,26 @@ const db = require('./../config/database')
 const User = require('./../models/insta')
 // const User=models.user
 class SampleController {
+
+    //login
+    login(uname,pass){
+        return new Promise((resolve,reject)=>{
+            try{
+                User.findOne({ where: { moboremail: uname } }).then(function(res){
+                    var passwordIsValid = bcrypt.compareSync(
+                        pass,
+                        res.pass
+                    );
+                    if(passwordIsValid){
+                        resolve("Success");
+                    }
+                })
+            }catch(err){
+                reject(err)
+            }
+        })
+    }
+
     //get particluar user
     getuser(data){
         return new Promise((resolve, reject) => {
@@ -155,7 +175,7 @@ class SampleController {
                     moboremail: moboremail,
                     fname: fname,
                     uname: uname,
-                    pass: pass,
+                    pass: bcrypt.hashSync(pass, 8),
                     phone: phone,
                     email: email,
                     website: website,

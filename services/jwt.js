@@ -6,7 +6,7 @@ const secret=JWT_SECRET.secret;
 //  
 const algorithm = "RS256";
 
-module.exports = class JWT {
+class JWT {
 	static sign(payload, expiresIn) {
 		return new Promise((resolve, reject) => {
 			jwt.sign(
@@ -41,3 +41,7 @@ module.exports = class JWT {
 		return jwt.decode(token, { complete: true });
 	}
 };
+
+module.exports = () => {
+    return new JWT();
+}
