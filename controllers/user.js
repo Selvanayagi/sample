@@ -8,14 +8,14 @@ class SampleController {
     login(uname,pass){
         return new Promise((resolve,reject)=>{
             try{
-                User.findOne({ where: { moboremail: uname } }).then(function(res){
-                    var passwordIsValid = bcrypt.compareSync(
-                        pass,
-                        res.pass
-                    );
-                    if(passwordIsValid){
+                User.findOne({ where: { moboremail: uname ,pass:pass} }).then(function(res){
+                    // var passwordIsValid = bcrypt.compareSync(
+                    //     pass,
+                    //     res.pass
+                    // );
+                    // if(passwordIsValid){
                         resolve("Success");
-                    }
+                    // }
                 })
             }catch(err){
                 reject(err)
@@ -175,7 +175,7 @@ class SampleController {
                     moboremail: moboremail,
                     fname: fname,
                     uname: uname,
-                    pass: bcrypt.hashSync(pass, 8),
+                    pass: pass,
                     phone: phone,
                     email: email,
                     website: website,
