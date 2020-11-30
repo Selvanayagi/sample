@@ -4,25 +4,8 @@ const User = require('./../models/insta')
 // const User=models.user
 class SampleController {
 
-    //login
-    login(uname,pass){
-        return new Promise((resolve,reject)=>{
-            try{
-                User.findOne({ where: { moboremail: uname ,pass:pass} }).then(function(res){
-                    // var passwordIsValid = bcrypt.compareSync(
-                    //     pass,
-                    //     res.pass
-                    // );
-                    // if(passwordIsValid){
-                        resolve("Success");
-                    // }
-                })
-            }catch(err){
-                reject(err)
-            }
-        })
-    }
 
+    
     //get particluar user
     getuser(data){
         return new Promise((resolve, reject) => {
@@ -170,46 +153,6 @@ class SampleController {
                     fav=k.fav;
                     email=k.email;
                     phone=k.phone;
-                })
-                User.create({
-                    moboremail: moboremail,
-                    fname: fname,
-                    uname: uname,
-                    pass: pass,
-                    phone: phone,
-                    email: email,
-                    website: website,
-                    bio: bio,
-                    gender: gender,
-                    profile: profile,
-                    posts:posts,
-                    fav: fav
-                }).then(function (sdepold) {
-                    resolve("success")
-                })
-
-            } catch (err) {
-                reject(err)
-            }
-        })
-    }
-    ct(data){
-        return new Promise((resolve, reject) => {
-            try {
-                var moboremail,fname,uname,pass,profile,gender,bio,website,posts,fav,email,phone;
-                data.forEach(k=>{
-                    moboremail="9500878566";
-                    fname="selva";
-                    uname="selvadia";
-                    pass="12345678";
-                    profile="https://www.iconfinder.com/data/icons/images-image-files-7/24/round_image_circle_picture_photo_photography-512.png";
-                    gender="";
-                    bio="";
-                    website="";
-                    posts="[]";
-                    fav="[]";
-                    email="";
-                    phone="9500878566";
                 })
                 User.create({
                     moboremail: moboremail,

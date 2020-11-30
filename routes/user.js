@@ -15,51 +15,20 @@ var storage = multer.diskStorage({
   }
 })
 var upload = multer({ storage: storage });
-class sample{
-  constructor(JWT) {
-    this.jwt= JWT
-    // this.init()
-  }
-}
-class sampleRoute  extends sample{
-  constructor(JWT,sampleContoller) {
-    super(JWT);
+
+class sampleRoute {
+  constructor(sampleContoller) {
     this.controller = sampleContoller
     this.init()
   }
-  
 
   init() {
     router.use('/', async (req, res, next) => {
       console.log("user")
       next()
     })
-    router.get('/login/:moboremail/:password',async(req,res)=>{
-      try {
-        const response = await this.controller.login(req.params.moboremail,req.params.password);
-        if(response=="success"){
-          const token=this.jwt.sign({id:req.params.moboremail},86400);
-          res.json({
-            status: true,
-            token: token
-          })
-        }
-        else{
-          res.json({
-            status:false,
-            token: response
-          })
-        }
-        res.json(response)
-      } catch (err) {
-        res.json({ code: 500, msg: 'getting Accesses Failed' })
-      }
-    })
     router.get('/getallusers',async(req,res)=>{
       try {
-            const token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];    
-            const tokenres=this.jwt.verify(token);
-            console.log(tokenres)        
             const response = await this.controller.getallusers()
             res.json(response)
           } catch (err) {
@@ -68,9 +37,6 @@ class sampleRoute  extends sample{
     })
     router.get('/getuser/:moboremail',async(req,res)=>{
       try {
-            const token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];    
-            const tokenres=this.jwt.verify(token);
-            console.log(tokenres) 
             const response = await this.controller.getuser(req.params.moboremail)
             res.json(response)
           } catch (err) {
@@ -79,9 +45,6 @@ class sampleRoute  extends sample{
     })
     router.post('/changepost/:email',async(req,res)=>{
       try {
-        const token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];    
-        const tokenres=this.jwt.verify(token);
-        console.log(tokenres) 
         var p=JSON.stringify(req.body);
         var ma=req.params.email
         const response = await this.controller.changepost(p,ma)
@@ -92,9 +55,6 @@ class sampleRoute  extends sample{
     })
     router.post('/changefav/:email',async(req,res)=>{
       try {
-        const token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];    
-        const tokenres=this.jwt.verify(token);
-        console.log(tokenres) 
         var p=JSON.stringify(req.body);
         var ma=req.params.email
         const response = await this.controller.changefav(p,ma)
@@ -105,9 +65,6 @@ class sampleRoute  extends sample{
     })
     router.post('/changepass/:email',async(req,res)=>{
       try {
-        const token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];    
-        const tokenres=this.jwt.verify(token);
-        console.log(tokenres) 
         let npass;
         req.body.forEach(k=>{
           npass= k.pass
@@ -121,9 +78,6 @@ class sampleRoute  extends sample{
     })
     router.post('/changepoto/:email',async(req,res)=>{
       try {
-        const token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];    
-        const tokenres=this.jwt.verify(token);
-        console.log(tokenres) 
         let npro;
         req.body.forEach(k=>{
           npro= k.url
@@ -137,9 +91,6 @@ class sampleRoute  extends sample{
     })
     router.post('/edit/:email',async(req,res)=>{
       try {
-        const token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];    
-        const tokenres=this.jwt.verify(token);
-        console.log(tokenres) 
         var email=req.params.email
         const response = await this.controller.edit(req.body,email)
         res.json(response)
@@ -148,14 +99,6 @@ class sampleRoute  extends sample{
       }
     })
     router.post('/saveuser',async(req,res)=>{
-      try {
-        const response = await this.controller.saveuser(req.body)
-        res.json(response)
-      } catch (err) {
-        res.json({ code: 500, msg: 'getting Accesses Failed' })
-      }
-    })
-    router.post('/ct',async(req,res)=>{
       try {
         const response = await this.controller.saveuser(req.body)
         res.json(response)
