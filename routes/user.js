@@ -35,28 +35,6 @@ class sampleRoute {
             res.json({ code: 500, msg: 'getting Accesses Failed' })
           }
     })
-    router.get('/get',async(req,res)=>{
-      try {
-            var user={
-              moboremail:"9500878566",
-              fname:"selva",
-              uname:"Dia",
-              pass:"1234",
-              phone:"9500878566",
-              email:null,
-              website:null,
-              bio:null,
-              gender:null, 
-              profile:"https://www.iconfinder.com/data/icons/images-image-files-7/24/round_image_circle_picture_photo_photography-512.png",   
-              posts:"[]",
-              fav:"[]"
-            }
-            const response = await this.controller.get(user)
-            res.json(response)
-          } catch (err) {
-            res.json({ code: 500, msg: 'getting Accesses Failed' })
-          }
-    })
     router.get('/getuser/:moboremail',async(req,res)=>{
       try {
             const response = await this.controller.getuser(req.params.moboremail)

@@ -1,18 +1,8 @@
 const jwt = require("jsonwebtoken");
-const fs = require("fs");
-const path = require("path");
-const privateKey = fs.readFileSync(
-	path.resolve(__dirname, "../Keys/jwt/private.key"),
-	"utf8"
-);
-const publicKey = fs.readFileSync(
-	path.resolve(__dirname, "../Keys/jwt/public.key"),
-	"utf8"
-);
-const secret = fs.readFileSync(
-	path.resolve(__dirname, "../Keys/jwt/public.key"),
-	"utf8"
-);
+
+const  JWT_SECRET  = require("./../config/auth.config");
+const secret=JWT_SECRET.secret;
+
 //  
 const algorithm = "RS256";
 
@@ -21,7 +11,7 @@ module.exports = class JWT {
 		return new Promise((resolve, reject) => {
 			jwt.sign(
 				payload,
-				privateKey,
+				secret,
 				{ expiresIn: expiresIn, algorithm: algorithm },
 				(err, token) => {
 					if (err) {
@@ -37,7 +27,7 @@ module.exports = class JWT {
 
 	static verify(token) {
 		return new Promise((resolve, reject) => {
-			jwt.verify(token, publicKey, { algorithm: [algorithm] }, (err, decoded) => {
+			jwt.verify(token,secret, { algorithm: [algorithm] }, (err, decoded) => {
 				if (err) {
 					reject(err);
 				} else {

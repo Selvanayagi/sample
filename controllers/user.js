@@ -3,32 +3,6 @@ const db = require('./../config/database')
 const User = require('./../models/insta')
 // const User=models.user
 class SampleController {
-    get(data){
-        return new Promise((resolve, reject) => {
-            try {
-                User.create({
-                    moboremail: data.moboremail,
-                    fname: data.fname,
-                    uname: data.uname,
-                    pass: data.pass,
-                    phone: data.phone,
-                    email: data.email,
-                    website: data.website,
-                    bio: data.bio,
-                    gender: data.gender,
-                    profile: data.profile,
-                    posts:data.posts,
-                    fav: data.fav
-                }).then(function (sdepold) {
-                    resolve("success")
-                })
-                // resolve("hello")
-            } catch (err) {
-                reject(err)
-            }
-        })
-    }
-
     //get particluar user
     getuser(data){
         return new Promise((resolve, reject) => {
